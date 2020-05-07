@@ -1,9 +1,9 @@
 const winston = require('winston');
 require('winston-mongodb');
-const config = require('config');
+const config = require('../config/default.json');
 require('express-async-errors');
 
-module.exports = function () {
+const exceptRejectLogger = () => {
   // uncaught Exception
   winston.exceptions.handle(
     new winston.transports.Console(),
@@ -16,5 +16,22 @@ module.exports = function () {
   });
 
   winston.add(new winston.transports.File({ filename: 'logs/unhandledRejection.log' }));
-  winston.add(new winston.transports.MongoDB({ db: config.get('connectionString') }));
+  winston.add(new winston.transports.MongoDB({ db: config.connectionString }));
 };
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  // defaultMeta: { service: 'user-service' },
+  transports: [
+    //
+    // - Write to all logs with level `info` and below to `combined.log` 
+    // - Write all logs error (and below) to `error.log`.
+    //
+    new winston.transports.File({ filename: 'logs/error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'logs/combined.log' })
+  ]
+});
+
+exports.logger = logger;
+exports.exceptRejectLogger = exceptRejectLogger;
