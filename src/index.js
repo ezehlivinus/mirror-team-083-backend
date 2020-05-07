@@ -1,11 +1,18 @@
-import app from './app';
+const express = require('express');
 
-const startApp = async () => {
-  const header = document.querySelector('[data-app-name]');
-  if (!header) return;
+const app = express();
 
-  const programName = await app();
-  header.textContent = programName;
-};
+// require('dotenv').config();
 
-document.addEventListener('DOMContentLoaded', startApp);
+// const logger = require('./startups/logging')();
+// require('./startups/routes')(app);
+// require('./startups/db');
+app.get('/', (req, res) => {
+  res.send('Hello Express');
+});
+const port = process.env.port || 3000;
+const server = app.listen(port, () => {
+  // logger.info(`Listening on port ${port}...`);
+});
+
+module.exports = server;
