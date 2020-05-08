@@ -1,18 +1,18 @@
 const express = require('express');
-const winston = require('winston');
-
 require('dotenv').config();
+const winston = require('winston');
 
 const app = express();
 const { exceptRejectLogger, logger } = require('./startups/logging');
+
 
 exceptRejectLogger();
 
 require('./startups/db')();
 require('./startups/routes')(app);
 
-
 const isDevelopment = process.env.NODE_ENV === 'development';
+
 const isTest = process.env.NODE_ENV === 'test';
 
 const port = process.env.PORT || 3000;

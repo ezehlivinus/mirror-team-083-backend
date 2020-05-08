@@ -1,5 +1,5 @@
 
-module.exports = function (handler) {
+module.exports = function handleMiddlewareAsyncError(handler) {
   return async (req, res, next) => {
     try {
       await handler(req, res);
