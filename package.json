@@ -7,6 +7,7 @@
     "boilerplate"
   ],
   "private": false,
+  "_commented": "main dist/index.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
@@ -18,7 +19,8 @@
     "test:cover": "jest --coverage",
     "lint": "eslint \"src/**/*.js\"",
     "/*start*/": "/* parcel ./src/index.js */",
-    "start": ".src/index.js"
+    "start": "src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": {
     "name": "Build For SDG",
@@ -34,7 +36,6 @@
   },
   "license": "MIT",
   "dependencies": {
-    "config": "^3.3.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
@@ -50,6 +51,7 @@
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
     "jest": "^25.4.0",
+    "nodemon": "^2.0.3",
     "parcel-bundler": "^1.12.4"
   },
   "browserslist": [

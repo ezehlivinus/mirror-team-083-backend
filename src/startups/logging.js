@@ -1,7 +1,7 @@
 const winston = require('winston');
 require('winston-mongodb');
-const config = require('../config/default.json');
 require('express-async-errors');
+require('dotenv').config()
 
 const exceptRejectLogger = () => {
   // uncaught Exception
@@ -16,7 +16,7 @@ const exceptRejectLogger = () => {
   });
 
   winston.add(new winston.transports.File({ filename: 'logs/unhandledRejection.log' }));
-  winston.add(new winston.transports.MongoDB({ db: config.connectionString }));
+  winston.add(new winston.transports.MongoDB({ db: process.env.DB_CONNECTION_STRING }));
 };
 
 const logger = winston.createLogger({

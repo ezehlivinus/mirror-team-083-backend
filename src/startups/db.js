@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const winston = require('winston');
+const { logger } = require('./logging');
+require('dotenv').config();
 
-const config = require('../config/default.json');
 
-
-module.exports = function () {
-  const db = config.connectionString;
+module.exports = (function database() {
+  const db = process.env.DB_CONNECTION_STRING;
   mongoose.connect(db, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true })
-    .then(() => winston.info(`Connected to ${db} ...`));
-};
+    .then(() => logger.info(`Connected to ${process.env.NODE_ENV} database...`));
+});
