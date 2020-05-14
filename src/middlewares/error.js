@@ -1,5 +1,5 @@
 const { logger } = require('../startups/logging');
-
+// handles middleware error
 module.exports = (error, req, res, next) => {
   logger.error(error.message, error);
 
@@ -9,5 +9,5 @@ module.exports = (error, req, res, next) => {
     'graceful-details': error.message
   };
 
-  res.status(500).send(data);
+  return res.status(500).send(data);
 };
