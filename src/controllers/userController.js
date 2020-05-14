@@ -67,7 +67,6 @@ exports.createUser = async (req, res) => {
 
     // upon registration all user are of type user
     const userType = await UserType.find({ name: 'user' }).populate('userType');
-    // eslint-disable-next-line no-underscore-dangle
     user.userType = userType.map((type) => type._id);
 
     await user.save();
